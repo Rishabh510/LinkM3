@@ -35,6 +35,9 @@ export const updateUserData = async (id, data) => {
 export const getUserData = async (id) => {
   return await appwrite.database.getDocument("users", id);
 };
+export const getWeekUserId = async () => {
+  return await appwrite.database.getDocument("weekUser", "weekUser");
+};
 export const getAllUsers = async (query = "") => {
   if (query.length)
     return await appwrite.database.listDocuments("users", [

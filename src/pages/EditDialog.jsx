@@ -88,16 +88,7 @@ export default function EditDialog({ id }) {
     try {
       const response = await getUserData(id);
       console.log(response);
-      setUserData({
-        name: response.name,
-        walletAddress: response.walletAddress,
-        about: response.about,
-        twitter: response.twitter,
-        linkedin: response.linkedin,
-        github: response.github,
-        instagram: response.instagram,
-        photo: response.photo,
-      });
+      setUserData(response);
     } catch (error) {
       console.log(error);
     }

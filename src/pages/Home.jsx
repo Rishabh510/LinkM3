@@ -1,6 +1,5 @@
 import { Appwrite } from "appwrite";
 import { useEffect, useState } from "react";
-import Album from "./Album";
 import Landing from "./Landing";
 import { init } from "../services/appwrite";
 
@@ -15,7 +14,6 @@ export const Home = () => {
   return (
     <div>
       <Landing />
-      {/* <Album /> */}
     </div>
   );
 };

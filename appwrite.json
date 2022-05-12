@@ -1,0 +1,17 @@
+{
+  "projectId": "LinkM3",
+  "projectName": "LinkM3",
+  "functions": [
+    {
+      "$id": "627d62d1a35c743accd5",
+      "name": "highlight",
+      "runtime": "node-16.0",
+      "path": "functions/highlight",
+      "entrypoint": "src/index.js",
+      "execute": [],
+      "events": [],
+      "schedule": "",
+      "timeout": 15
+    }
+  ]
+}
