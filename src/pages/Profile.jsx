@@ -8,7 +8,12 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { getAllUsers, getUser, magicLink } from "../services/appwrite";
+import {
+  getAllUsers,
+  getWeekUserId,
+  getUser,
+  getUserData,
+} from "../services/appwrite";
 import { useNavigate } from "react-router-dom";
 import EditDialog from "./EditDialog";
 import { IconButton, InputBase, Paper } from "@mui/material";
@@ -17,6 +22,7 @@ import Item from "../components/Item";
 import { styled } from "@mui/material/styles";
 import List from "@mui/material/List";
 import AccountMenu from "../components/AccountMenu";
+import Highlight from "../components/Highlight";
 function Copyright(props) {
   return (
     <Typography
@@ -43,6 +49,7 @@ const Demo = styled("div")(({ theme }) => ({
 export default function Profile() {
   const navigate = useNavigate();
   const [user, setUser] = React.useState(null);
+  const [weekUser, setWeekUser] = React.useState(null);
   const [users, setUsers] = React.useState(null);
 
   async function initUser() {
@@ -54,6 +61,16 @@ export default function Profile() {
     } catch (error) {
       console.log(error);
       navigate("/login");
+    }
+  }
+
+  async function getWeekUser() {
+    try {
+      const response = await getWeekUserId();
+      const response2 = await getUserData(response.id);
+      setWeekUser(response2);
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -70,6 +87,7 @@ export default function Profile() {
 
   React.useEffect(() => {
     initUser();
+    getWeekUser();
     handleSearch();
   }, []);
 
@@ -92,6 +110,7 @@ export default function Profile() {
                 {user && <EditDialog id={user.$id} />}
               </Toolbar>
             </AppBar>
+            {weekUser && <Highlight user={weekUser} />}
             <Box
               sx={{
                 marginTop: 8,
@@ -100,6 +119,7 @@ export default function Profile() {
                 alignItems: "center",
               }}
             >
+              {/* Search */}
               <Paper
                 // component="form"
                 sx={{
